@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <title>Navigation Bar</title>
+        <style>
+            div{
+                position: relative;
+
+            }
+            .nav{
+                background-color: #003566;
+                width: 100%;
+                height: 8%;
+                
+            }
+            .img{
+                position: fixed;
+                top: 15px;
+                left: 45px;
+            }
+            .menu{
+                color:white;
+                float: right;
+                padding: 15px ;
+                
+            }
+            @media all and (max-width: 550px){
+                body{
+                    background-color: #003566;
+                    
+                    
+                }
+                .menu{
+                    position: absolute;
+                    
+                }
+                .icon{
+                position: absolute;
+                width: 45px;
+                height: 5px;
+                background-color: white;
+                top:10px;
+                right: 10px;
+
+            }
+                 #icon1{
+                margin: 6px 0 0 0;
+                }
+                 #icon2{
+                margin: 16px 0 0 0;
+                }
+                #icon3{
+                margin:26px 0 0 0;
+                }
+                .nav{
+                    color: black;
+
+                }
+                .icon:focus{
+                    
+                }
+                #one{
+                    z-index: 20;
+                    margin-top: 3em;
+                    margin-left: 50%;
+                    
+                }
+                #two{
+                    z-index: 19;
+                    margin-top: 5em;
+                    margin-left: 50%;
+                }
+                #three{
+                    z-index: 18;
+                    margin-top:7em;
+                    margin-left: 50%;
+                }
+                #four{
+                    z-index: 17;
+                    margin-top: 9em;
+                    margin-left: 50%;
+                }
+                #five{
+                    z-index: 16;
+                    margin-top: 11em;
+                    margin-left: 50%;
+                }
+                
+                
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <div class="nav">
+                <div class="menu" id="five">FEEDBACK</div>
+                <div class="menu" id="four">FAQ</div>
+                <div class="menu" id="three">CONTACT US</div>
+                <div class="menu" id="two">ABOUT</div>
+                <div class="menu" id="one">HOME</div>
+                <div class="icon" id="icon1"></div>
+                <div class="icon" id="icon2"></div>
+                <div class="icon" id="icon3"></div>
+                 <div class="img">
+                    <img src="https://content3.jdmagicbox.com/comp/mohali/n2/0172px172.x172.170209095117.v8n2/catalogue/codequotient-industrial-area-phase-8-mohali-institutes-0jvhvlov4d.jpg" height="40px" width="40px"/>
+                </div>
+                
+                <label for="icon"></label>
+                       
+        </div>
+        
+    </body>
+</html>
