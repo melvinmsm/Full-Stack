@@ -2,6 +2,7 @@
     <div id="items">
 
     </div>
+</br>   
     <div id="bill">
     </div>
 <script>
@@ -185,61 +186,109 @@ var Bill = {
     ]
 }
 
-var itemName={
+function task1(){
+    
+    var Bill1={
     "id":Bill.id,
     "billNumber":Bill.billNumber,
     "opentime" : Bill.opentime,
     "customerName" : Bill.customerName,
-    "billItems":[{
-        "id":Bill.billItems[0].id,
-        "name":items[1].itemName,
-        "quantity":Bill.billItems[0].quantity
+    "billItems":[],
+    }
+    var nameItem;
+    function addName(i){
+        Bill.billItems.forEach(function (key,index){
+            if(index==i){
+                items.forEach(function (key1, index1){
+                    if(key.id==key1.id){
+                        nameItem=key1.itemName;
+                    }
+                })
+            }
+        })   
+    }
+    for(let i=0;i<Bill.billItems.length;i++){
+        addName(i);
+        Bill1.billItems.push({
+            id:Bill.billItems[i].id,
+            name:nameItem,
+            quantity:Bill.billItems[i].quantity,
+        });
+    }
 
-    },
+    let printItem=JSON.stringify(Bill1);
+    document.getElementById("items").innerHTML=printItem;
+
+}
+task1();
+
+function task2(){
+    var nameitem,taxesitem, supercategoryitem, categorynameitem,rateitem,
+    totalAmount=0,tax_find=0,discount_find=0;
+
+    function add_name_taxes_rate(i){
+        Bill.billItems.forEach(function (key, index){
+            if(index==i){
+                items.forEach(function (key1,index1){
+                    if(key.id==key1.id)
+                        {
+                            nameitem=key1.itemName;
+                            taxesitem=key1.taxes;
+                            add_supercategoryname(key1.category.categoryId);
+                            rateitem=key1.rate;
+                            key1.taxes.forEach(function (key2, index)
+                            {
+                                tax_find+=key2.rate;
+                            })
+                            discount_find=key.discount.rate;
+                            calc_bill(rateitem , discount_find , tax_find , Bill.billItems[i].quantity)
+                        }
+                })
+            }
+        })
+    }
+    function add_supercategoryname( i )
     {
-        "id":Bill.billItems[1].id,
-        "name":items[0].itemName,
-        "quantity":Bill.billItems[1].quantity
-
-    },
+        Categories.forEach(function( key , index)
+        {
+            if(key.id==i)
+            {
+                supercategorynameitem=key.superCategory.superCategoryName;
+                categorynameitem=key.categoryName;
+            }
+        })
+    }
+    function calc_bill( rate , discount , taxes , item_quantity ){
+        totalAmount+=  ((rate+taxes-discount)*item_quantity);
+        Bill1.TotalAmount = totalAmount;
+    }
+    var Bill1={
+        id:Bill.id,
+        billNumber:Bill.billNumber,
+        opentime:Bill.opentime,
+        customerName:Bill.customerName,
+        billItems:[],
+        TotalAmount:totalAmount,
+    }
+    for(let i=0;i<Bill.billItems.length;i++)
     {
-        "id":Bill.billItems[2].id,
-        "name":items[3].itemName,
-        "quantity":Bill.billItems[2].quantity
-    }]
+        add_name_taxes_rate(i);
+        Bill1.billItems.push({
+            id:Bill.billItems[i].id,
+            name:nameitem,
+            quantity:Bill.billItems[i].quantity,
+            discount:Bill.billItems[i].discount,
+            taxes:taxesitem,
+            amount:Bill.billItems[i].quantity*rateitem,
+            superCategoryName:supercategorynameitem,
+            categoryName:categorynameitem,
+        });
+    }
+    let calculator = JSON.stringify(Bill1) // Converted object to string. 
+    document.getElementById("bill").innerHTML = calculator; // to print in div
 
 }
-
-
-console.log(itemName);
-let printItem=JSON.stringify(itemName);
-document.getElementById("items").innerHTML=printItem;
-
-
-var billObj={
-    "id":Bill.id,
-    "billNumber":Bill.billNumber,
-    "customerName" : Bill.customerName,
-    "billItems":[{
-        "id":Bill.billItems[0].id,
-        "name":items[1].itemName,
-        "quantity":Bill.billItems[0].quantity,
-        "discount":{
-            "rate":Bill.billItems[0].discount.rate,
-            "isInPercent":Bill.billItems[0].discount.isInPercent
-        }
-        
-    },
-    
-    ]
-}
-
-function calc_bill(billObj){
-   return billObj;
-}
-console.log(calc_bill(billObj));
-let calculator = JSON.stringify(billObj) // Converted object to string. 
-document.getElementById("bill").innerHTML = calculator; // to print in div
+task2();
 
 </script>
 </body>
